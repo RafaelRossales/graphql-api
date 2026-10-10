@@ -18,7 +18,7 @@
     "test:cov": "npx dotenv-cli -e .env.test -- jest --runInBand --coverage",
     "test:debug": "npx dotenv-cli -e .env.test -- node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "npx dotenv-cli -e .env.test -- jest --runInBand --config ./test/jest-e2e.json",
-    "test:int": "npx dotenv-cli -e .env.test -- jest --runInBand --config ./test/jest-int.json",
+    "test:int": "npx dotenv-cli -e .env.test -- jest --runInBand --config ./jest.int.config.ts",
     "eslint:fix": "pnpm exec eslint . --fix",
     "postinstall": "prisma skills sync || exit 0",
     "prisma:migratetest": "npx dotenv-cli -e .env.test -- npx prisma migrate deploy"
@@ -42,6 +42,7 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3.2.0",
     "@eslint/js": "^9.18.0",
+    "@faker-js/faker": "^10.6.0",
     "@nestjs/cli": "^11.0.0",
     "@nestjs/schematics": "^11.0.0",
     "@nestjs/testing": "^11.0.1",
