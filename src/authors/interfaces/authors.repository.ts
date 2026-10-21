@@ -6,7 +6,7 @@ export type SearchParams = {
   perPage?: number
   filter?: string
   sort?: string
-  sortDir: 'asc' | 'desc'
+  sortDir?: 'asc' | 'desc'
 }
 
 export type SearchResult = {
