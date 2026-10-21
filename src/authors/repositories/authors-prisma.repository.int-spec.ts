@@ -75,6 +75,32 @@ describe('AuthorsPrismaRepository Integration Tests', () => {
     expect(result.name).toBe('new name')
   })
 
+  test('should delete an author', async () => {
+    const data: ICreateAuthor = AuthorDataBuilder({})
+    const author = await prisma.author.create({ data })
+    const result = await repository.delete(author.id)
+    expect(result).toMatchObject(author)
+  })
+
+  test('should throw an error when deleting an author', async () => {
+    const id: string = 'ee5814c2-2af8-4a3c-b439-035d7c422de8'
+    await expect(repository.delete(id)).rejects.toThrow(
+      new NotFoundError(`Author not found using ID ${id}`),
+    )
+  })
+
+  test('should return null when Author is not found by email', async () => {
+    const result = await repository.findByEmail('test@test.com')
+    expect(result).toBeNull()
+  })
+
+  test('should return null when Author is not found by email', async () => {
+    const data = AuthorDataBuilder({ email: 'test@test.com' })
+    const author = await prisma.author.create({ data })
+    const result = await repository.findByEmail('test@test.com')
+    expect(result).toMatchObject(author)
+  })
+
   describe('search method', () => {
     test('should only apply pagination when the parameters are null', async () => {
       const createdAt = new Date()
